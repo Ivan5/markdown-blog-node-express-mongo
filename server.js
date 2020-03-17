@@ -3,9 +3,13 @@ const mongoose = require("mongoose");
 const articleRouter = require("./routes/articles");
 const app = express();
 
-app.set("view engine", "ejs");
+mongoose.connect("mongodb://localhost/markdown", {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+});
 
-app.use("/articles", articleRouter);
+app.set("view engine", "ejs");
+app.use(express.urlencoded({ extended: false }));
 
 app.get("/", (req, res) => {
   const articles = [
@@ -22,5 +26,5 @@ app.get("/", (req, res) => {
   ];
   res.render("articles/index", { articles });
 });
-
+app.use("/articles", articleRouter);
 app.listen(5000);
