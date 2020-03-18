@@ -6,7 +6,8 @@ const app = express();
 
 mongoose.connect("mongodb://localhost/markdown", {
   useNewUrlParser: true,
-  useUnifiedTopology: true
+  useUnifiedTopology: true,
+  useCreateIndex: true
 });
 
 app.set("view engine", "ejs");
